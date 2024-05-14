@@ -4,7 +4,7 @@ const express = require("express");
 const { Pool } = require("pg");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 8550;
 const app = express();
 
 // Configurar o CORS para permitir todas as origens
