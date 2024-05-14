@@ -4,12 +4,11 @@ const express = require("express");
 const { Pool } = require("pg");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-
+const port = process.env.PORT || 4000;
 const app = express();
 
 // Configurar o CORS para permitir todas as origens
 app.use(cors());
-app.port = process.env.PORT || 4000;
 
 // Configurar o body-parser para analisar corpos de requisição JSON
 app.use(bodyParser.json());
