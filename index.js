@@ -40,6 +40,22 @@ async function criarTabelas() {
         senha_cliente VARCHAR(255) NOT NULL
       );
 
+      CREATE TABLE IF NOT EXISTS Atendente (
+        id_atendente SERIAL PRIMARY KEY,
+        nome_atendente VARCHAR(255),
+        cargo_atendente VARCHAR(255),
+        telefone_atendente VARCHAR(15),
+        senha_atendente VARCHAR(255)
+    );
+
+    CREATE TABLE IF NOT EXISTS Pedidos (
+      id_pizza SERIAL PRIMARY KEY,
+      data_pedido DATE,
+      status_pedido VARCHAR(255),
+      nome_pedido VARCHAR(255),
+      id_cliente INTEGER REFERENCES Clientes(id_cliente),
+  );
+
       INSERT INTO Clientes (nome_cliente, email_cliente, endereco_cliente, telefone_cliente, senha_cliente)
       VALUES ('João','joao@gmail.com','Rua 1, 123','(11) 99999-9999','123456');
     `);
