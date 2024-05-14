@@ -6,7 +6,6 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const app = express();
-const port = 3000;
 
 // Configurar o CORS para permitir todas as origens
 app.use(cors());
@@ -31,8 +30,8 @@ pool.connect((err, client, release) => {
   client.release(); // Libera o cliente de volta para o pool
 });
 
-app.listen(port, () => {
-  console.log(`Servidor iniciado em http://localhost:${port}`);
+app.listen(DB_PORT, () => {
+  console.log(`Servidor iniciado em http://localhost:${DB_PORT}`);
 });
 
 
