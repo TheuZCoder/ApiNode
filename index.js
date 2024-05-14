@@ -6,7 +6,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const port = process.env.PORT || 8550;
 const app = express();
-
+import pg from 'pg';
+const { Pool } = pg;
 // Configurar o CORS para permitir todas as origens
 app.use(cors());
 
@@ -15,9 +16,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false } // Adicione esta linha se estiver usando SSL/TLS
-});
+  connectionString: process.env.POSTGRES_URL,
+})
 
 async function criarTabelas() {
   try {
