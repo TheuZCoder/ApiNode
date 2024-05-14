@@ -9,6 +9,7 @@ const app = express();
 
 // Configurar o CORS para permitir todas as origens
 app.use(cors());
+app.port = process.env.PORT || 4000;
 
 // Configurar o body-parser para analisar corpos de requisição JSON
 app.use(bodyParser.json());
