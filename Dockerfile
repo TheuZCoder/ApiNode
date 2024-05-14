@@ -3,6 +3,7 @@ FROM node:latest
 
 # Defina a porta em que o aplicativo Express estará escutando (padrão 8550)
 ENV PORT=8550
+ENV DATABASE_URL=postgres://pizzaria_ta_user:Z82HU3rwVnGGAiix1Vv4DwLDIeZJXYds@dpg-coio8f8l5elc73db1scg-a/pizzaria_ta
 
 # Crie e defina o diretório de trabalho dentro do contêiner
 WORKDIR /app
