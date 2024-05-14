@@ -3,6 +3,7 @@ require('dotenv').config(); // Carrega as variáveis de ambiente do arquivo .env
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const port = process.env.PORT;
 const app = express();
 const { Pool } = pg;
 // Configurar o CORS para permitir todas as origens
