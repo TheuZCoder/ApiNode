@@ -1,20 +1,20 @@
-# Use a imagem base do Node.js com a versão desejada
-FROM node:14
+# Use a imagem base do Node.js
+FROM node:latest
 
-# Defina o diretório de trabalho dentro do contêiner
+# Crie e defina o diretório de trabalho dentro do contêiner
 WORKDIR /app
 
-# Copie o package.json e o package-lock.json para o diretório de trabalho
-COPY package*.json ./
+# Copie o arquivo package.json para o diretório de trabalho
+COPY package.json .
 
-# Instale as dependências do Node.js
+# Instale as dependências do projeto
 RUN npm install
 
 # Copie o restante dos arquivos do projeto para o diretório de trabalho
 COPY . .
 
-# Exponha a porta em que sua aplicação Node.js estará ouvindo (substitua PORT pelo número da porta)
-EXPOSE PORT
+# Exponha a porta em que o aplicativo Express está sendo executado
+EXPOSE 3000
 
-# Comando para iniciar sua aplicação quando o contêiner for executado
-CMD [ "node", "index.js" ]
+# Comando para iniciar o aplicativo quando o contêiner for executado
+CMD ["npm", "start"]

@@ -1,6 +1,8 @@
+require('dotenv').config(); // Carrega as variáveis de ambiente do arquivo .env
+
 const express = require("express");
 const { Pool } = require("pg");
-const bodyParser = require("body-parser"); // Importe o body-parser aqui
+const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const app = express();
@@ -14,11 +16,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "pizzaria_ta",
-  password: "postgres",
-  port: 5432,
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_DATABASE,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
 });
 
 pool.connect((err, client, release) => {
@@ -28,6 +30,11 @@ pool.connect((err, client, release) => {
   console.log("Conexão bem-sucedida com o banco de dados");
   client.release(); // Libera o cliente de volta para o pool
 });
+
+app.listen(port, () => {
+  console.log(`Servidor iniciado em http://localhost:${port}`);
+});
+
 
 //ROTA DE GET PARA LISTAR AS PIZZAS ANTES DE CONSEGUIR PUXAR O ID PARA EDIÇÃO
 app.get("/menu/:id", async (req, res) => {
