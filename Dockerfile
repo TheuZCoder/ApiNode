@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Exponha a porta em que o aplicativo Express está sendo executado
-EXPOSE 5432
+EXPOSE 8550
 
 # Comando para iniciar o aplicativo quando o contêiner for executado
 CMD ["npm", "start"]
