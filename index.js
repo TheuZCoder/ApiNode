@@ -30,7 +30,70 @@ pool.connect((err, client, release) => {
   client.release(); // Libera o cliente de volta para o pool
 });
 
+async function criarTabelas() {
+  try {
+    await client.connect();
 
+    // Criação da tabela Produto
+    await client.query(`
+    CREATE TABLE Produto (
+      id_pizza SERIAL PRIMARY KEY,
+      image_pizza VARCHAR(255),
+      nome_pizza VARCHAR(255),
+      descricao_pizza VARCHAR(255),
+      preco_pizza DECIMAL(10, 2)
+  );
+    `);
+
+    // Criação da tabela Clientes
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS Clientes (
+        id SERIAL PRIMARY KEY,
+        nome_cliente VARCHAR(255) NOT NULL,
+        email_cliente VARCHAR(255) UNIQUE NOT NULL,
+        endereco_cliente TEXT,
+        telefone_cliente VARCHAR(20),
+        senha_cliente VARCHAR(255) NOT NULL
+      )
+    `);
+
+    await client.query(`
+    CREATE TABLE Pedidos (
+      id_pedido SERIAL PRIMARY KEY,
+      data_pedido DATE,
+      status_pedido VARCHAR(255),
+      nome_pedido VARCHAR(255)
+  );
+    `);
+    await client.query(`
+    CREATE TABLE Atendente (
+      id_atendente SERIAL PRIMARY KEY,
+      nome_atendente VARCHAR(255),
+      cargo_atendente VARCHAR(255),
+      telefone_atendente VARCHAR(15),
+      senha_atendente VARCHAR(255)
+  );
+    `);
+    await client.query(`
+    CREATE TABLE Pedido_Produto (
+      id_pedido SERIAL,
+      id_produto SERIAL,
+      quantidade INT DEFAULT 1,
+      FOREIGN KEY (id_pedido) REFERENCES Pedidos (id_pedido),
+      FOREIGN KEY (id_produto) REFERENCES Produto (id_pizza),
+      PRIMARY KEY (id_pedido, id_produto)
+  );
+    `);
+
+    console.log('Tabelas criadas com sucesso');
+  } catch (error) {
+    console.error('Erro ao criar as tabelas:', error);
+  } finally {
+    await client.end();
+  }
+}
+
+criarTabelas();
 //ROTA DE GET PARA LISTAR AS PIZZAS ANTES DE CONSEGUIR PUXAR O ID PARA EDIÇÃO
 app.get("/menu/:id", async (req, res) => {
   const pizzaId = req.params.id;
