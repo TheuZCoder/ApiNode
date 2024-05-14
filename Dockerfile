@@ -1,6 +1,9 @@
 # Use a imagem base do Node.js
 FROM node:latest
 
+# Defina a porta em que o aplicativo Express estará escutando (padrão 8550)
+ENV PORT=8550
+
 # Crie e defina o diretório de trabalho dentro do contêiner
 WORKDIR /app
 
@@ -14,7 +17,7 @@ RUN npm install
 COPY . .
 
 # Exponha a porta em que o aplicativo Express está sendo executado
-EXPOSE 8550
+EXPOSE $PORT
 
 # Comando para iniciar o aplicativo quando o contêiner for executado
 CMD ["npm", "start"]

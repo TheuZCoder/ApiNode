@@ -30,10 +30,6 @@ pool.connect((err, client, release) => {
   client.release(); // Libera o cliente de volta para o pool
 });
 
-app.listen(port, () => {
-  console.log(`Servidor iniciado em http://localhost:${port}`);
-});
-
 
 //ROTA DE GET PARA LISTAR AS PIZZAS ANTES DE CONSEGUIR PUXAR O ID PARA EDIÇÃO
 app.get("/menu/:id", async (req, res) => {
