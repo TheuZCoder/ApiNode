@@ -58,6 +58,9 @@ async function criarTabelas() {
 
       INSERT INTO Clientes (nome_cliente, email_cliente, endereco_cliente, telefone_cliente, senha_cliente)
       VALUES ('João','joao@gmail.com','Rua 1, 123','(11) 99999-9999','123456');
+
+      INSERT INTO Atendente (nome_atendente, senha_atendente)
+      VALUES ('Matheus','123');
     `);
     client.release();
     console.log('Tabelas criadas com sucesso.');
