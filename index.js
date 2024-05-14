@@ -31,8 +31,8 @@ pool.connect((err, client, release) => {
   client.release(); // Libera o cliente de volta para o pool
 });
 
-app.listen(4000, () => {
-  console.log(`Servidor iniciado em http://localhost:${4000}`);
+app.listen(port, () => {
+  console.log(`Servidor iniciado em http://localhost:${port}`);
 });
 
 
