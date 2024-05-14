@@ -49,11 +49,12 @@ async function criarTabelas() {
     );
 
     CREATE TABLE IF NOT EXISTS Pedidos (
-      id_pizza SERIAL PRIMARY KEY,
+      id_pedido SERIAL PRIMARY KEY,
       data_pedido DATE,
       status_pedido VARCHAR(255),
       nome_pedido VARCHAR(255),
       id_cliente INTEGER REFERENCES Clientes(id_cliente),
+      id_pizza INTEGER REFERENCES Produto(id_pizza)
   );
 
       INSERT INTO Clientes (nome_cliente, email_cliente, endereco_cliente, telefone_cliente, senha_cliente)
