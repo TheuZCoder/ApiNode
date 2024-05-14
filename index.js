@@ -1,11 +1,12 @@
 require('dotenv').config(); // Carrega as variáveis de ambiente do arquivo .env
 
 const express = require("express");
+const { Pool } = require("pg");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const port = process.env.PORT;
+const port = process.env.PORT || 8550;
 const app = express();
-const { Pool } = pg;
+
 // Configurar o CORS para permitir todas as origens
 app.use(cors());
 
@@ -14,8 +15,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const pool = new Pool({
-  connectionString: process.env.POSTGRES_URL,
-})
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false } // Adicione esta linha se estiver usando SSL/TLS
+});
 
 async function criarTabelas() {
   try {
