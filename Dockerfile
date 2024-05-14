@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 3000
 
 # Comando para iniciar o aplicativo quando o contêiner for executado
-CMD ["node", "index"]
+CMD ["npm", "start"]
